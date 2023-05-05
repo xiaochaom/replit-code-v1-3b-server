@@ -1,4 +1,4 @@
-bind = "0.0.0.0:8801"
+bind = "127.0.0.1:8801"
 workers = 1
 daemon = True
 loglevel = "info"
