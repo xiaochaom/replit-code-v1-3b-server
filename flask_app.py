@@ -15,7 +15,7 @@ if device == "cuda":
     model = AutoModelForCausalLM.from_pretrained(REPO, use_auth_token=token, trust_remote_code=True,
                                                  low_cpu_mem_usage=True).to(device_ids[0], dtype=torch.bfloat16)
     # 将模型复制到多个 GPU 上
-    model = torch.nn.DataParallel(model, device_ids=device_ids)
+    model = torch.nn.DataParallel(model, device_ids=device_ids).module
 else:
     model = AutoModelForCausalLM.from_pretrained(REPO, use_auth_token=token, trust_remote_code=True,
                                                  low_cpu_mem_usage=True)
@@ -85,7 +85,7 @@ def code_generation(prompt, max_new_tokens, temperature=0.2, top_p=0.9, top_k=No
     print('use_cache ', use_cache)
     print('repetition_penalty ', repetition_penalty)
     print("Prompt shape: ", x.shape) # just adding to see in the space logs in prod
-    y = model.module.generate(x,
+    y = model.generate(x,
                        max_new_tokens=max_new_tokens,
                        temperature=temperature,
                        pad_token_id=tokenizer.pad_token_id,
