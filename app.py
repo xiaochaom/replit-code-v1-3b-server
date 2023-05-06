@@ -76,7 +76,7 @@ def code_generation(prompt, max_new_tokens, temperature=0.2, seed=42, top_p=0.9,
                        )
     completion = tokenizer.decode(y[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)
     completion = completion[len(prompt):]
-    return completion
+    return post_processing(prompt, completion)
 
 
 demo = gr.Blocks(

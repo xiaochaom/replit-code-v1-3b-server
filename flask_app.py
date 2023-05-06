@@ -100,7 +100,8 @@ def code_generation(prompt, max_new_tokens, temperature=0.2, top_p=0.9, top_k=No
     print('5t' + str(datetime.datetime.now()))
     completion = completion[len(prompt):]
     print('6t' + str(datetime.datetime.now()))
-    return post_processing(prompt, completion)
+    # return post_processing(prompt, completion)
+    return completion
 
 def post_processing(prompt, completion):
     return prompt + completion
